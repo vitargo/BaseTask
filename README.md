@@ -17,7 +17,7 @@ Calculate max(a*b*c, a+b+c)+3.
 ### Task 5
 Write a grading program based on the student’s rating accordint the following rules:
 Рейтинг | Оценка
-----------------
+:------:|:------:
   0-19  |   F
   20-39 |   E
   40-59 |   D

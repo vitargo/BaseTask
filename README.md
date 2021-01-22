@@ -3,7 +3,7 @@
 ## Conditional operators
 
 ### Task 1
-If a - even count a * b, othrwise a + b.
+If a - even count a * b, otherwise a + b.
 
 ### Task 2
 Determine which quarter belongs to the point with coordinates (x,y).
@@ -15,8 +15,9 @@ Find sum of only positive number of three given numbers.
 Calculate max(a*b*c, a+b+c)+3.
 
 ### Task 5
-Write a grading program based on the student’s rating accordint the following rules:
-Рейтинг | Оценка
+Write a grading program based on the student’s rating according the following rules:
+
+   Rate | Result
 :------:|:------:
   0-19  |   F
   20-39 |   E

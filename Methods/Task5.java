@@ -1,4 +1,4 @@
-4import java.util.Scanner;
+import java.util.Scanner;
 
 public class Task5{
     static String numAsText(long b){

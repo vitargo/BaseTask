@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.github.calculator.MCalc">
+  <grid id="27dc6" binding="MCalc" layout-manager="GridLayoutManager" row-count="5" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="10" left="10" bottom="10" right="10"/>
+    <constraints>
+      <xy x="12" y="-21" width="722" height="541"/>
+    </constraints>
+    <properties>
+      <background color="-2235699"/>
+      <minimumSize width="500" height="500"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="6000c" class="javax.swing.JLabel" binding="number1">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="5" use-parent-layout="false">
+            <preferred-size width="55" height="16"/>
+          </grid>
+        </constraints>
+        <properties>
+          <foreground color="-16777216"/>
+          <text value="Число 1"/>
+        </properties>
+      </component>
+      <component id="79e6d" class="javax.swing.JTextField" binding="textNumber2">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="5" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="67"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-259"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="8570d" class="javax.swing.JTextField" binding="textOperation">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="5" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="67"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-259"/>
+        </properties>
+      </component>
+      <component id="add82" class="javax.swing.JTextField" binding="textResult">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="5" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="67"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-259"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="5a84b" class="javax.swing.JTextField" binding="textNumber1">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="5" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="67"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-259"/>
+        </properties>
+      </component>
+      <component id="c53d9" class="javax.swing.JLabel" binding="operation">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="5" use-parent-layout="false">
+            <preferred-size width="75" height="16"/>
+          </grid>
+        </constraints>
+        <properties>
+          <foreground color="-16777216"/>
+          <text value="Операция"/>
+        </properties>
+      </component>
+      <component id="fc1c6" class="javax.swing.JLabel" binding="number2">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="5" use-parent-layout="false">
+            <preferred-size width="55" height="16"/>
+          </grid>
+        </constraints>
+        <properties>
+          <foreground color="-16777216"/>
+          <text value="Число 2"/>
+        </properties>
+      </component>
+      <component id="21a4a" class="javax.swing.JLabel" binding="result">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="5" use-parent-layout="false">
+            <preferred-size width="75" height="16"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-16777216"/>
+          <foreground color="-16777216"/>
+          <text value="Результат"/>
+        </properties>
+      </component>
+      <component id="e3920" class="javax.swing.JButton" binding="buttonCalc">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="5" use-parent-layout="false">
+            <preferred-size width="498" height="99"/>
+          </grid>
+        </constraints>
+        <properties>
+          <actionCommand value="Посчитать"/>
+          <autoscrolls value="false"/>
+          <background color="-2235699"/>
+          <borderPainted value="true"/>
+          <doubleBuffered value="true"/>
+          <foreground color="-2235699"/>
+          <icon value="images/button.png"/>
+          <iconTextGap value="0"/>
+          <inheritsPopupMenu value="false"/>
+          <label value=""/>
+          <margin top="0" left="0" bottom="0" right="0"/>
+          <selected value="true"/>
+          <text value=""/>
+          <visible value="true"/>
+        </properties>
+        <clientProperties>
+          <hideActionText class="java.lang.Boolean" value="false"/>
+        </clientProperties>
+      </component>
+    </children>
+  </grid>
+  <inspectionSuppressions>
+    <suppress inspection="NoLabelFor" id="6fa62"/>
+    <suppress inspection="MissingMnemonic" id="e3920"/>
+    <suppress inspection="I18nForm" id="e3920"/>
+  </inspectionSuppressions>
+</form>

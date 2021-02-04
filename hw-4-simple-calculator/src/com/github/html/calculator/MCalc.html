@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Калькулятор</title>
+    <script>
+        function calc()
+        {
+            var number1 = parseFloat(document.getElementById('number1').value);
+            var number2 = parseFloat(document.getElementById('number2').value);
+            var operator = document.getElementById('operator').value;
+
+            if(operator === '+')
+            {
+                document.getElementById('result').value = number1 + number2;
+            }
+            if(operator === '*')
+            {
+                document.getElementById('result').value = number1 * number2;
+            }
+            if(operator === '-')
+            {
+                document.getElementById('result').value = number1 - number2;
+            }
+            if(operator === '/')
+            {
+                document.getElementById('result').value = number1 / number2;
+            }
+        }
+
+    </script>
+    <style>
+        body{
+            background-color: #DDE2CD;
+        }
+        .button{
+            background-color: #DDE2CD;
+            width:560px;
+            height:80px;
+            margin-left:32px;
+            cursor: pointer;
+            text-align: center;
+            padding: 4px;
+            border-style: outset;
+            border-top: 15px solid #f4f6ef;
+            border-left: 15px solid #f4f6ef;
+            border-bottom: 15px solid #c8d0ae;
+            border-right: 15px solid #c8d0ae;
+        }
+        input{
+            width:500px;
+            height:50px;
+            margin-top:10px;
+            margin-bottom:10px
+        }
+        .main{
+            position: absolute;
+        }
+        td {
+            vertical-align: center;
+            text-align: right;
+            background-color: #DDE2CD;
+            font-family: Calibri, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <form name="form">
+            <table class="center">
+                <tr>
+                    <td>
+                        Число 1
+                    </td>
+                    <td>
+                        <input class="textview" type="text" id="number1"><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Число 2
+                    </td>
+                    <td>
+                        <input class="textview" type="text" id="number2"><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Операция
+                    </td>
+                    <td>
+                        <input class="textview" type="text" id="operator"><br/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    <input class="button" type="button" id="butCalc" value="Посчитать" onclick="calc()"><br/>
+        <form name="form">
+            <table>
+                <tr>
+                    <td>
+                        Результат
+                    </td>
+                    <td>
+                        <input class="textview" type="text" id="result">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

@@ -15,8 +15,14 @@ public class StarsTask7 {
                 for (int sp2 = raw/2; sp2 > i; sp2--) {
                     System.out.print(" ");
                 }
-                for(int p = raw-2; p > raw/2+i; p--){
-                    System.out.print(" ");
+                if(raw%2==0) {
+                    for (int p = raw - 1; p > raw / 2 + i; p--) {
+                        System.out.print(" ");
+                    }
+                }else {
+                    for(int p = raw-2; p > raw/2+i; p--) {
+                        System.out.print(" ");
+                    }
                 }
                 if (i != raw/2) {
                     System.out.print("*\n");

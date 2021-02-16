@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Convertor</title>
+    <script>
+        function openCategory(evt, category) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(category).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        function convertLength() {
+            var value = parseFloat(document.getElementById('valueLength').value);
+            var resultLength = 0;
+            var fromLength = document.getElementById("fromLength").value;
+                if (fromLength !== "m"){
+                    switch (fromLength){
+                        case 'km':
+                        value = value*1000;
+                        break;
+                    case 'mile':
+                        value = value*1609.344;
+                        break;
+                    case 'nautical mile':
+                        value = value*1852;
+                        break;
+                    case 'cable':
+                        value = value*219.45600;
+                        break;
+                    case 'league':
+                        value = value*5556;
+                        break;
+                    case 'foot':
+                        value = value*0.3048;
+                        break;
+                    case 'yard':
+                        value = value*1.0936133;
+                        break;
+                    }
+                }
+                var toLength = document.getElementById("toLength").value;
+                switch(toLength){
+                    case 'km':
+                        resultLength = value/1000;
+                        break;
+                    case 'mile':
+                        resultLength = value*0.00062137;
+                        break;
+                    case 'nautical mile':
+                        resultLength = value*0.0005399568;
+                        break;
+                    case 'cable':
+                        resultLength = value*0.0054;
+                        break;
+                    case 'league':
+                        resultLength = value*0.000179985601;
+                        break;
+                    case 'foot':
+                        resultLength = value*3.2808399;
+                        break;
+                    case 'yard':
+                        resultLength = value*0.9144;
+                        break;
+                    case 'm':
+                        resultLength = value;
+                }
+            document.getElementById('resultLength').value = resultLength;
+        }
+    </script>
+
+    <script>
+            function convertTemp() {
+            var value = parseFloat(document.getElementById('valueTemp').value);
+            var resultTemp = 0;
+            var fromTemp = document.getElementById("fromTemp").value;
+                if (fromTemp !== "C"){
+                    switch (fromTemp){
+                    case 'K':
+                        value = value-273.15;
+                        break;
+                    case 'F':
+                        value = (value-32)*5/9;
+                        break;
+                    case 'Re':
+                        value = value*1.25;
+                        break;
+                    case 'Ro':
+                        value = (value-7.5)/0.52500;
+                        break;
+                    case 'Ra':
+                        value = (value-459.67-32)/1.8;
+                        break;
+                    case 'N':
+                        value = value*100/33;
+                        break;
+                    case 'D':
+                        value = 100 - value*(2/3);
+                        break;
+                    }
+                }
+                var toTemp = document.getElementById("toTemp").value;
+                switch(toTemp){
+                    case 'K':
+                        resultTemp = value+273.15;
+                        break;
+                    case 'F':
+                        resultTemp = value*9/5+32;
+                        break;
+                    case 'Re':
+                        resultTemp = value*0.8;
+                        break;
+                    case 'Ro':
+                        resultTemp = (value*21)/40+7.5;
+                        break;
+                    case 'Ra':
+                        resultTemp = value*1.8+32+459.67;
+                        break;
+                    case 'N':
+                        resultTemp = value*33/100;
+                        break;
+                    case 'D':
+                        resultTemp = (100 - value) * (3/2);
+                        break;
+                    case 'C':
+                        resultTemp = value;
+                }
+            document.getElementById('resultTemp').value = resultTemp;
+        }
+
+        function convertWeight()
+        {
+            var value = parseFloat(document.getElementById('valueWeight').value);
+            var resultWeight = 0;
+            var fromWeight = document.getElementById("fromWeight").value;
+                if (fromWeight !== "kg"){
+                    switch (fromWeight){
+                    case 'g':
+                        value = value/1000;
+                        break;
+                    case 'carat':
+                        value = value*0.0002;
+                        break;
+                    case 'eng pound':
+                        value = value * 0.454;
+                        break;
+                    case 'pound':
+                        value = value*0.45359237;
+                        break;
+                    case 'stone':
+                        value = value*6.35029318;
+                        break;
+                    case 'rus pound':
+                        value = value*0.409512037;
+                        break;
+                }
+                }
+                var toWeight = document.getElementById("toWeight").value;
+                switch(toWeight){
+                    case 'g':
+                        resultWeight = value*1000;
+                        break;
+                    case 'carat':
+                        resultWeight = value*5000;
+                        break;
+                    case 'eng pound':
+                        resultWeight = value * 2.205;
+                        break;
+                    case 'pound':
+                        resultWeight = value*2.20462262;
+                        break;
+                    case 'stone':
+                        resultWeight = value*0.157473044;
+                        break;
+                    case 'rus pound':
+                        resultWeight = value*2.441899995502;
+                        break;
+                    case 'kg':
+                        resultWeight = value;
+                }
+            document.getElementById('resultWeight').value = resultWeight;
+        }
+        function convertTime()
+        {
+            var value = parseFloat(document.getElementById('valueTime').value);
+            var resultTime = 0;
+            var fromTime = document.getElementById("fromTime").value;
+                if (fromTime !== "sec"){
+                    switch (fromTemp){
+                    case 'min':
+                        value = value*60;
+                        break;
+                    case 'hour':
+                        value = value*3600;
+                        break;
+                    case 'day':
+                        value = value*86400;
+                        break;
+                    case 'week':
+                        value = value*604800;
+                        break;
+                    case 'month':
+                        value = value*2628000;
+                        break;
+                    case 'year':
+                        value = value*31536000;
+                        break;
+                }
+                }
+                var toTime = document.getElementById("toTime").value;
+                switch(toTime){
+                    case 'min':
+                        resultTime = value*0.016666666666667;
+                        break;
+                    case 'hour':
+                        resultTime= value*0.000277777778;
+                        break;
+                    case 'day':
+                        resultTime = value*1.15741E-5;
+                        break;
+                    case 'week':
+                        value*1.6534391534392E-6;
+                        break;
+                    case 'month':
+                        resultTime = value*3.8051750380518E-7;
+                        break;
+                    case 'year':
+                        resultTime = value*3.1709791983765E-8;
+                        break;
+                    case 'sec':
+                        resultTime = value;
+                }
+            document.getElementById('resultTime').value = resultTime;
+        }
+
+        function convertVolume()
+        {
+            var value = parseFloat(document.getElementById('valueVolume').value);
+            var resultVolume = 0;
+            var fromVolume = document.getElementById("fromVolume").value;
+                if (fromVolume !== "l"){
+                    switch (fromVolume){
+                    case 'm^3':
+                        value = value*1000;
+                        break;
+                    case 'gallon':
+                        value = value*3.785411784;
+                        break;
+                    case 'pint':
+                        value = value*0.473176473;
+                        break;
+                    case 'quart':
+                        value = value*0.946352946;
+                        break;
+                    case 'barrel':
+                        value = value*158.98729493;
+                        break;
+                    case 'cubic foot':
+                        value = value*28.316846592;
+                        break;
+                    case 'cubic inch':
+                        value = value*0.016387064;
+                        break;
+                    }
+                }
+                var toVolume = document.getElementById("toVolume").value;
+                switch(toVolume){
+                    case 'm^3':
+                        resultVolume = value*0.001;
+                        break;
+                    case 'gallon':
+                        resultVolume = value*0.2641720524;
+                        break;
+                    case 'pint':
+                        resultVolume = value*2.1133764189;
+                        break;
+                    case 'quart':
+                        resultVolume = value*1.0566882094;
+                        break;
+                    case 'barrel':
+                        resultVolume = value*0.0062898108;
+                        break;
+                    case 'cubic foot':
+                        resultVolume = value*0.0353146667;
+                        break;
+                    case 'cubic inch':
+                        resultVolume = value*61.023744095;
+                        break;
+                    case 'l':
+                        resultVolume = value;
+                }
+            document.getElementById('resultVolume').value = resultVolume;
+        }
+    </script>
+
+    <style>
+        body{
+            background-color: #C3F0EF;
+        }
+        .header{
+            background-color: #f1f1f1;
+            text-align: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 1024px;
+            padding: 0 15px;
+            margin: 20px auto;
+        }
+        .container:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        td {
+            vertical-align: center;
+            text-align: center;
+            background-color: #f1f1f1;
+            font-family: Calibri, sans-serif;
+        }
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+        }
+        .tab button:hover {
+            background-color: #ddd;
+        }
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+            background-color: #f1f1f1;
+        }
+        .tabcontent {
+            animation: fadeEffect 1s;
+        }
+
+        @keyframes fadeEffect {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+    </style>
+</head>
+<body>
+<header>
+    <div class = "container">
+        <h1>Convertor</h1>
+    </div>
+</header>
+<div class = "main">
+    <div class = "container">
+        <div class="tab">
+            <button class="tablinks" onclick="openCategory(event, 'Length')" id="defaultOpen">Length</button>
+            <button class="tablinks" onclick="openCategory(event, 'Temperature')">Temperature</button>
+            <button class="tablinks" onclick="openCategory(event, 'Weight')">Weight</button>
+            <button class="tablinks" onclick="openCategory(event, 'Time')">Time</button>
+            <button class="tablinks" onclick="openCategory(event, 'Volume')">Volume</button>
+        </div>
+             <div id="Length" class="tabcontent">
+                 <br>
+                 <form name="formLength">
+                     <table class="center">
+                         <tr>
+                             <td>
+                                 Convert
+                             </td>
+                             <td>
+                                 <input class="textview" type="text" id="valueLength"><br/>
+                             </td>
+                             <td>
+                                 <form action="/action_page.php">
+                                     <label for="fromLength">from:</label>
+                                     <select name="fromLength" id="fromLength">
+                                         <option value="m">m</option>
+                                         <option value="km">km</option>
+                                         <option value="mile">mile</option>
+                                         <option value="nautical mile">nautical mile</option>
+                                         <option value="cable">cable</option>
+                                         <option value="league">league</option>
+                                         <option value="foot">foot</option>
+                                         <option value="yard">yard</option>
+                                     </select>
+                                 </form>
+                             </td>
+                         </tr>
+                         <tr>
+                             <td>
+                             </td>
+                             <td>
+                                 <form action="/action_page.php">
+                                     <label for="toLength">to:</label>
+                                     <select name="toLength" id="toLength">
+                                         <option value="m">m</option>
+                                         <option value="km">km</option>
+                                         <option value="mile">mile</option>
+                                         <option value="nautical mile">nautical mile</option>
+                                         <option value="cable">cable</option>
+                                         <option value="league">league</option>
+                                         <option value="foot">foot</option>
+                                         <option value="yard">yard</option>
+                                     </select>
+                                 </form>
+                             </td>
+                             <td>
+                                 <input class="textview" type="text" id="resultLength"><br/>
+                             </td>
+                         </tr>
+                         <tr>
+                             <td>
+                             </td>
+                             <td>
+                                 <input class="button" type="button" id="buttonLength" value="Convert" onclick="convertLength()"><br/>
+                             </td>
+                         </tr>
+                     </table>
+                 </form>
+             </div>
+
+            <div id="Temperature" class="tabcontent">
+                <br>
+                <form name="formTemp">
+                    <table class="center">
+                        <tr>
+                            <td>
+                                Convert
+                            </td>
+                            <td>
+                                <input class="textview" type="text" id="valueTemp"><br/>
+                            </td>
+                            <td>
+                                <form action="/action_page.php">
+                                    <label for="fromTemp">from:</label>
+                                    <select name="fromTemp" id="fromTemp">
+                                        <option value="C">C</option>
+                                        <option value="K">K</option>
+                                        <option value="F">F</option>
+                                        <option value="Re">Re</option>
+                                        <option value="Ro">Ro</option>
+                                        <option value="Ra">Ra</option>
+                                        <option value="N">N</option>
+                                        <option value="D">D</option>
+                                        </select>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                                <form action="/action_page.php">
+                                    <label for="toTemp">to:</label>
+                                    <select name="toTemp" id="toTemp">
+                                        <option value="C">C</option>
+                                        <option value="K">K</option>
+                                            <option value="F">F</option>
+                                            <option value="Re">Re</option>
+                                            <option value="Ro">Ro</option>
+                                            <option value="Ra">Ra</option>
+                                            <option value="N">N</option>
+                                            <option value="D">D</option>
+                                        </select>
+                                    </form>
+                                </td>
+                                <td>
+                                    <input class="textview" type="text" id="resultTemp"><br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                    <input class="button" type="button" id="buttonTemp" value="Convert" onclick="convertTemp()"><br/>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+
+                <div id="Weight" class="tabcontent">
+                    <br>
+                    <form name="formWeight">
+                        <table class="center">
+                            <tr>
+                                <td>
+                                    Convert
+                                </td>
+                                <td>
+                                    <input class="textview" type="text" id="valueWeight"><br/>
+                                </td>
+                                <td>
+                                    <form action="/action_page.php">
+                                        <label for="fromWeight">from:</label>
+                                        <select name="fromWeight" id="fromWeight">
+                                            <option value="kg">kg</option>
+                                            <option value="g">g</option>
+                                            <option value="carat">carat</option>
+                                            <option value="eng pound">eng pound</option>
+                                            <option value="pound">pound</option>
+                                            <option value="stone">stone</option>
+                                            <option value="rus pound">rus pound</option>
+                                        </select>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                    <form action="/action_page.php">
+                                        <label for="toWeight">to:</label>
+                                        <select name="toWeight" id="toWeight">
+                                            <option value="kg">kg</option>
+                                            <option value="g">g</option>
+                                            <option value="carat">carat</option>
+                                            <option value="eng pound">eng pound</option>
+                                            <option value="pound">pound</option>
+                                            <option value="stone">stone</option>
+                                            <option value="rus pound">rus pound</option>
+                                        </select>
+                                    </form>
+                                </td>
+                                <td>
+                                    <input class="textview" type="text" id="resultWeight"><br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                    <input class="button" type="button" id="buttonWeight" value="Convert" onclick="convertWeight()"><br/>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+
+                <div id="Time" class="tabcontent">
+                    <br>
+                    <form name="formTime">
+                        <table class="center">
+                            <tr>
+                                <td>
+                                    Convert
+                                </td>
+                                <td>
+                                    <input class="textview" type="text" id="valueTime"><br/>
+                                </td>
+                                <td>
+                                    <form action="/action_page.php">
+                                        <label for="fromTime">from:</label>
+                                        <select name="fromTime" id="fromTime">
+                                            <option value="sec">sec</option>
+                                            <option value="min">min</option>
+                                            <option value="hour">hour</option>
+                                            <option value="day">day</option>
+                                            <option value="week">week</option>
+                                            <option value="month">month</option>
+                                            <option value="astronomical year">astronomical year</option>
+                                        </select>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                    <form action="/action_page.php">
+                                        <label for="toTime">to:</label>
+                                        <select name="toTime" id="toTime">
+                                            <option value="sec">sec</option>
+                                            <option value="min">min</option>
+                                            <option value="hour">hour</option>
+                                            <option value="day">day</option>
+                                            <option value="week">week</option>
+                                            <option value="month">month</option>
+                                            <option value="astronomical year">astronomical year</option>
+                                        </select>
+                                    </form>
+                                </td>
+                                <td>
+                                    <input class="textview" type="text" id="resultTime"><br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                    <input class="button" type="button" id="buttonVolume" value="Convert" onclick="convertTime()"><br/>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+
+                <div id="Volume" class="tabcontent">
+                    <br>
+                    <form name="formVolume">
+                        <table class="center">
+                            <tr>
+                                <td>
+                                    Convert
+                                </td>
+                                <td>
+                                    <input class="textview" type="text" id="valueVolume"><br/>
+                                </td>
+                                <td>
+                                    <form action="/action_page.php">
+                                        <label for="fromVolume">from:</label>
+                                        <select name="fromVolume" id="fromVolume">
+                                            <option value="l">l</option>
+                                            <option value="m^3">m^3</option>
+                                            <option value="gallon">gallon</option>
+                                            <option value="pint">pint</option>
+                                            <option value="quart">quart</option>
+                                            <option value="barrel">barrel</option>
+                                            <option value="cubic foot">cubic foot</option>
+                                            <option value="cubic inch">cubic inch</option>
+                                        </select>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                    <form action="/action_page.php">
+                                        <label for="toVolume">to:</label>
+                                        <select name="toVolume" id="toVolume">
+                                            <option value="l">l</option>
+                                            <option value="m^3">m^3</option>
+                                            <option value="gallon">gallon</option>
+                                            <option value="pint">pint</option>
+                                            <option value="quart">quart</option>
+                                            <option value="barrel">barrel</option>
+                                            <option value="cubic foot">cubic foot</option>
+                                            <option value="cubic inch">cubic inch</option>
+                                        </select>
+                                    </form>
+                                </td>
+                                <td>
+                                    <input class="textview" type="text" id="resultVolume"><br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                    <input class="button" type="button" id="buttonTime" value="Convert" onclick="convertVolume()"><br/>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<footer><div class = "container"></div></footer>
+</body>
+</html>

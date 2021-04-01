@@ -1,0 +1,162 @@
+{\rtf1\ansi\ansicpg1251\cocoartf2578
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fmodern\fcharset0 Courier;\f2\fmodern\fcharset0 Courier-Oblique;
+}
+{\colortbl;\red255\green255\blue255;\red153\green168\blue186;\red32\green32\blue32;\red191\green100\blue38;
+\red88\green118\blue71;\red109\green109\blue109;\red133\green96\blue154;\red254\green187\blue91;\red173\green169\blue32;
+\red225\green179\blue88;}
+{\*\expandedcolortbl;;\csgenericrgb\c60000\c65882\c72941;\csgenericrgb\c12549\c12549\c12549;\csgenericrgb\c74902\c39216\c14902;
+\csgenericrgb\c34510\c46275\c27843;\csgenericrgb\c42745\c42745\c42745;\csgenericrgb\c52157\c37647\c60392;\csgenericrgb\c99608\c73333\c35686;\csgenericrgb\c67843\c66275\c12549;
+\csgenericrgb\c88235\c70196\c34510;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf2 \cb3     \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1 \cf4 package \cf2 org.bitbucket.gui.crud.config\cf4 ;\
+\
+import \cf2 com.mongodb.Mongo\cf4 ;\
+import \cf2 com.mongodb.MongoClientSettings\cf4 ;\
+import \cf2 com.mongodb.MongoCredential\cf4 ;\
+import \cf2 com.mongodb.ServerAddress\cf4 ;\
+import \cf2 com.mongodb.client.MongoClient\cf4 ;\
+import \cf2 com.mongodb.client.MongoClients\cf4 ;\
+import \cf2 com.mongodb.client.MongoDatabase\cf4 ;\
+import \cf2 com.mongodb.client.MongoCollection\cf4 ;\
+import \cf2 Person\cf4 ;\
+import \cf2 org.bson.Document\cf4 ;\
+import \cf2 IPeopleRepo\cf4 ;\
+import \cf2 org.bitbucket.gui.crud.repository.impl.*\cf4 ;\
+import \cf2 JDBCConnectionPool\cf4 ;\
+import \cf2 org.bson.codecs.configuration.CodecRegistry\cf4 ;\
+import \cf2 org.bson.codecs.pojo.PojoCodecProvider\cf4 ;\
+\
+import \cf2 javax.print.attribute.standard.DocumentName\cf4 ;\
+import \cf2 java.util.Arrays\cf4 ;\
+\
+import static \cf2 org.bson.codecs.configuration.CodecRegistries.fromProviders\cf4 ;\
+import static \cf2 org.bson.codecs.configuration.CodecRegistries.fromRegistries\cf4 ;\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf2 \
+\
+\
+
+\f1 \cf4 public static \cf2 IPeopleRepo peopleRepoMongoDB() \{\
+\
+        CodecRegistry pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry()\cf4 ,\
+                \cf2 fromProviders(PojoCodecProvider.builder().automatic(\cf4 true\cf2 ).build()))\cf4 ;\
+        \cf2 MongoClient mongoClient = MongoClients.create(\cf5 "mongodb://root:12345@localhost:27017/crud?authSource=admin"\cf2 )\cf4 ;\
+\
+\cf6 //        MongoClient mongoClient = MongoClients.create(\
+//                MongoClientSettings.builder()\
+//                        .applyToClusterSettings(builder ->\
+//                                builder.hosts(Arrays.asList(new ServerAddress("localhost", 27017))))\
+//                        .build());\
+        \cf2 MongoCredential credential = MongoCredential.createCredential(\cf5 "root"\cf4 , \cf5 "crud"\cf4 ,\
+                    \cf5 "12345"\cf2 .toCharArray())\cf4 ;\
+\
+        \cf6 //MongoDatabase database = mongoClient.getDatabase("crud");\
+        \cf2 MongoDatabase database = mongoClient.getDatabase(\cf5 "crud"\cf2 ).withCodecRegistry(pojoCodecRegistry)\cf4 ;\
+\
+        \cf6 //MongoCollection<Document> collection = database.getCollection("people");\
+        \cf2 MongoCollection<Person> collection = database.getCollection(\cf5 "people"\cf4 , \cf2 Person.\cf4 class\cf2 )\cf4 ;\
+        return new \cf2 PeopleMongoDBRepo(credential\cf4 , \cf2 database\cf4 , \cf2 collection)\cf4 ;\
+    \cf2 \}\
+\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf4 package \cf2 org.bitbucket.gui.crud.repository.impl\cf4 ;\
+\
+import \cf2 com.mongodb.MongoCredential\cf4 ;\
+import \cf2 com.mongodb.client.*\cf4 ;\
+\
+import \cf2 Person\cf4 ;\
+import \cf2 IPeopleRepo\cf4 ;\
+\
+import \cf2 org.bson.conversions.Bson\cf4 ;\
+\
+import \cf2 java.util.ArrayList\cf4 ;\
+import \cf2 java.util.List\cf4 ;\
+\
+import \cf2 com.mongodb.client.model.Filters\cf4 ;\
+\
+import static \cf2 com.mongodb.client.model.Filters.
+\f2\i eq
+\f1\i0 \cf4 ;\
+\
+\
+public class \cf2 PeopleMongoDBRepo \cf4 implements \cf2 IPeopleRepo \{\
+\
+    \cf4 private \cf2 MongoCredential \cf7 credential\cf4 ;\
+\
+    private \cf2 MongoDatabase \cf7 database\cf4 ;\
+\
+    private \cf2 MongoCollection<Person> \cf7 collection\cf4 ;\
+\
+\
+    public \cf8 PeopleMongoDBRepo\cf2 (MongoCredential credential\cf4 , \cf2 MongoDatabase database\cf4 , \cf2 MongoCollection<Person> collection) \{\
+        \cf4 this\cf2 .\cf7 credential \cf2 = credential\cf4 ;\
+        this\cf2 .\cf7 database \cf2 = database\cf4 ;\
+        this\cf2 .\cf7 collection \cf2 = collection\cf4 ;\
+\
+        \cf6 //\
+    \cf2 \}\
+\
+    \cf9 @Override\
+    \cf4 public \cf2 Person \cf8 save\cf2 (Person p) \{\
+        \cf4 this\cf2 .\cf7 collection\cf2 .insertOne(p)\cf4 ;\
+        return \cf2 p\cf4 ;\
+    \cf2 \}\
+\
+    \cf9 @Override\
+    \cf4 public \cf2 List<Person> \cf8 findAll\cf2 () \{\
+        List<Person> result = \cf4 new \cf2 ArrayList<>()\cf4 ;\
+        for\cf2 (Person person : \cf4 this\cf2 .\cf7 collection\cf2 .find())\{\
+            result.add(person)\cf4 ;\
+        \cf2 \}\
+    \cf4 return \cf2 result\cf4 ;\
+    \cf2 \}\
+\
+    \cf9 @Override\
+    \cf4 public void \cf8 update\cf2 (Person p) \{\
+        Bson filter = 
+\f2\i eq
+\f1\i0 (\cf5 "_id"\cf4 , \cf2 p.getId())\cf4 ;\
+        this\cf2 .\cf7 collection\cf2 .findOneAndReplace(filter\cf4 , \cf2 p)\cf4 ;\
+    \cf2 \}\
+\
+    \cf9 @Override\
+    \cf4 public void \cf8 remove\cf2 (\cf4 long \cf2 id) \{\
+        System.
+\f2\i \cf7 out
+\f1\i0 \cf2 .println(id)\cf4 ;\
+        \cf2 Bson filter = 
+\f2\i eq
+\f1\i0 (\cf5 "_id"\cf4 , \cf2 id)\cf4 ;\
+        this\cf2 .\cf7 collection\cf2 .findOneAndDelete(filter)\cf4 ;\
+    \cf2 \}\
+\}\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf10 <dependency>\
+    <groupId>\cf2 org.mongodb\cf10 </groupId>\
+    <artifactId>\cf2 mongodb-driver-sync\cf10 </artifactId>\
+    <version>\cf2 4.0.5\cf10 </version>\
+</dependency>\
+<dependency>\
+    <groupId>\cf2 org.mongodb\cf10 </groupId>\
+    <artifactId>\cf2 mongodb-driver-legacy\cf10 </artifactId>\
+    <version>\cf2 3.9.0\cf10 </version>\
+</dependency>\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf2 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \
+\
+\
+\
+\
+}
